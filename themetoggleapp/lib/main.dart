@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    isDarMode = !isDarMode;
+                    isDarMode = !isDarMode;   
                   });
                 },
                 child: Text("Toogle Theme"),
