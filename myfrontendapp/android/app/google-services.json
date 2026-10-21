@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "311614203395",
+    "project_id": "septback-98b3a",
+    "storage_bucket": "septback-98b3a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311614203395:android:7f095155e6af1e256b1036",
+        "android_client_info": {
+          "package_name": "com.example.myfrontendapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATGANS1bgDKBTHC9vTEGzTonWl7z_O71c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
