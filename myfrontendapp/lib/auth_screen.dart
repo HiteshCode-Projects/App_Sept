@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -10,18 +11,32 @@ class _AuthScreenState extends State<AuthScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance; //Authentication Connection
+  final firestore = FirebaseFirestore.instance; //Database Connextion
 
   //SIgnup
   void signUp() async {
     try {
-      await auth.createUserWithEmailAndPassword(
+      UserCredential user = await auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
 
+      //Save the user in Firestore
+      await firestore.collection('users').doc(user.user!.uid).set({
+        //Map : key:value pair
+        'email': emailController.text,
+        'createdAt': Timestamp.now(),
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User Created")));
+
       print("User Created");
     } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+
       print(e);
     }
   }
@@ -34,8 +49,13 @@ class _AuthScreenState extends State<AuthScreen> {
         password: passwordController.text,
       );
 
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Successfully")));
+
       print("Login Successfully");
     } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
       print(e);
     }
   }
